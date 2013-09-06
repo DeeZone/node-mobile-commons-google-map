@@ -6,5 +6,5 @@ amqp = require('amqp');
 var app = express();
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log(“RabbitMQ + Node.js app running on AppFog!”);
+  console.log("RabbitMQ + Node.js app running on AppFog!");
 });
