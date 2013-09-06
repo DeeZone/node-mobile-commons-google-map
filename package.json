@@ -1,0 +1,28 @@
+{
+  "name": "node-map",
+  "version": "0.0.1",
+  "author": "Dee  <darrendouglas.lee@gmail.com>",
+  "description": "a learning project to display pins on a Google map based on SMS info from Mobile Coommons.",
+  "contributors": [
+    {
+      "name": "Dee Lee",
+      "email": "darrendouglas.lee@gmail.com"
+    }
+  ],
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeeZone/node-mobile-commons-google-map.git"
+  },
+  "keywords": [
+    "cli",
+    "http",
+    "server"
+  ],
+  "dependencies": {
+    "express": "*",
+    "amqp": "*"
+  }
+}
