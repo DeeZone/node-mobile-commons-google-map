@@ -13,10 +13,20 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("RabbitMQ + Node.js app running on AppFog!");
+});
+
 app.connectionStatus = 'No server connection';
 app.exchangeStatus = 'No exchange established';
 app.queueStatus = 'No queue established';
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("RabbitMQ + Node.js app running on AppFog!");
-});
+app.get('/', function(req, res){
+  res.render('index.jade',
+    {
+      title: 'Welcome to RabbitMQ and Node/Express on AppFog',
+      connectionStatus: app.connectionStatus,
+      exchangeStatus: app.exchangeStatus,
+      queueStatus: app.queueStatus
+    });
+});i
