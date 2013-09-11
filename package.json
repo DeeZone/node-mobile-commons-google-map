@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "express": "*",
-    "amqp": "*"
+    "amqp": "*",
+    "jade": "*"
   }
 }

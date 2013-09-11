@@ -29,4 +29,38 @@ app.get('/', function(req, res){
       exchangeStatus: app.exchangeStatus,
       queueStatus: app.queueStatus
     });
-});i
+});
+
+app.post('/start-server', function(req, res){
+  
+  app.rabbitMqConnection = amqp.createConnection({ host: 'localhost' });
+  // https://github.com/lucperkins/af-rabbitmq-example/blob/master/app.js
+  // app.rabbitMqConnection = amqp.createConnection({ url: connectionUrl() });
+
+  app.rabbitMqConnection.on('ready', function(){
+    app.connectionStatus = 'Connected!';
+    res.redirect('/');
+  });
+});
+
+app.post('/new-exchange', function(req, res){
+  app.e = app.rabbitMqConnection.exchange('test-exchange');
+  app.exchangeStatus = 'An exchange has been established!';
+  res.redirect('/');
+});
+
+app.post('/new-queue', function(req, res){
+  app.q = app.rabbitMqConnection.queue('test-queue');
+  app.queueStatus = 'The queue is ready for use!';
+  
+  res.redirect('/');
+});
+
+app.get('/message-service', function(req, res){
+  app.q.bind(app.e, '#');
+  res.render('message-service.jade',
+    {
+      title: 'Welcome to the messaging service',
+      sentMessage: ''
+    });
+});
