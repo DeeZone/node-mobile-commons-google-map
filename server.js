@@ -64,3 +64,17 @@ app.get('/message-service', function(req, res){
       sentMessage: ''
     });
 });
+
+app.post('/newMessage', function(req, res){
+  var newMessage = req.body.newMessage;
+  console.log('newMessage: ' + newMessage);
+  app.e.publish('routingKey', { message: newMessage });
+
+  app.q.subscribe(function(msg){
+  res.render('message-service.jade',
+    {
+      title: 'You\'ve got mail!',
+      sentMessage: msg.message
+    });
+  });
+});
